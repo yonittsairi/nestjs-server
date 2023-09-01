@@ -1,1 +1,6 @@
-export class CreateHobbyDto {}
+export class CreateHobbyDto {
+
+    userId: number;
+    hobby: string
+
+}

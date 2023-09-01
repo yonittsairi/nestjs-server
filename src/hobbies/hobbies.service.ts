@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHobbyDto } from './dto/create-hobby.dto';
-import { UpdateHobbyDto } from './dto/update-hobby.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HobbyEntity } from './entities/hobby.entity';
+import { resolve } from 'path';
+import { rejects } from 'assert';
 
 @Injectable()
 export class HobbiesService {
@@ -13,7 +14,18 @@ export class HobbiesService {
 
   }
   create(createHobbyDto: CreateHobbyDto) {
-    return this.repository.save(createHobbyDto)
+    return new Promise((resolve, reject) => {
+      this.repository.findOne({ where: createHobbyDto }).then(
+        (res) => {
+          if (!res) {
+            resolve(this.repository.save(createHobbyDto))
+          }
+          reject('Hobby already exists')
+        }
+      )
+    })
+
+
   }
 
   findAll() {
@@ -24,11 +36,4 @@ export class HobbiesService {
     return this.repository.findOne({ where: { id } });
   }
 
-  update(id: number, UpdateHobbyDto: UpdateHobbyDto) {
-    return this.repository.update({ id }, { ...UpdateHobbyDto })
-  }
-
-  remove(id: number) {
-    return this.repository.softDelete({ id })
-  }
 }
