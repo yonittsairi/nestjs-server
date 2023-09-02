@@ -1,7 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { HobbyEntity } from '../hobbies/hobby.entity';
-import { UserEntity } from '../user/user.entity';
+import { HobbyEntity } from '../hobbies/hobby.entity.js';
+import { UserEntity } from '../user/user.entity.js';
 
 export default class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
