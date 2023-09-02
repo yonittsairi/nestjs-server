@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, Column, OneToOne, JoinColumn, OneToMany, DeleteDateColumn } from 'typeorm';
 import { MaxLength, MinLength } from 'class-validator';
-import { HobbyEntity } from 'src/hobbies/hobby.entity';
+import { HobbyEntity } from '../hobbies/hobby.entity';
 
 
 @Entity({ name: 'user', schema: 'yonit_tzairi' })
