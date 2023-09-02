@@ -1,5 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { HobbyEntity } from '../hobbies/hobby.entity';
+import { UserEntity } from '../user/user.entity';
 
 export default class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
@@ -12,7 +14,7 @@ export default class TypeOrmConfig {
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
       schema: configService.get('DB_SCHEMA'),
-      entities: ['dist/**/*.entity.{ts,js}'],
+      entities: [UserEntity, HobbyEntity],
       synchronize: true,
       logging: true,
       extra: {
@@ -31,4 +33,3 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   useFactory: async (configService: ConfigService): Promise<TypeOrmModuleOptions> => TypeOrmConfig.getOrmConfig(configService),
   inject: [ConfigService]
 }
-
