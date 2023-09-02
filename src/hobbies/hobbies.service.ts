@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateHobbyDto } from './dto/create-hobby.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { HobbyEntity } from './entities/hobby.entity';
+import { HobbyEntity } from './hobby.entity';
 import { resolve } from 'path';
 import { rejects } from 'assert';
 

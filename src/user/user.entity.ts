@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, Column, OneToOne, JoinColumn, OneToMany, DeleteDateColumn } from 'typeorm';
 import { MaxLength, MinLength } from 'class-validator';
-import { HobbyEntity } from 'src/hobbies/entities/hobby.entity';
+import { HobbyEntity } from 'src/hobbies/hobby.entity';
 
 
 @Entity({ name: 'user', schema: 'yonit_tzairi' })
@@ -25,7 +25,7 @@ export class UserEntity {
     @Column()
     phoneNumber: string
 
-    @OneToMany(() => HobbyEntity, (hobby) => hobby.user, { eager: true, cascade: ['soft-remove'] })
+    @OneToMany(() => HobbyEntity, (hobby) => hobby.user, { eager: true, cascade: ['soft-remove', 'remove'] })
     hobbies: HobbyEntity[];
 
     @DeleteDateColumn()

@@ -9,8 +9,12 @@ import { ConfigModule } from '@nestjs/config';
 ;
 @Module({
   imports: [HobbiesModule, UserModule,
-    ConfigModule.forRoot({}),
-    TypeOrmModule.forRootAsync(typeOrmConfigAsync)
+    ConfigModule.forRoot({
+      cache: false, ignoreEnvFile: false
+    }),
+    TypeOrmModule.forRootAsync(
+      typeOrmConfigAsync
+    )
   ],
   controllers: [AppController],
   providers: [AppService],
