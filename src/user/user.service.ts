@@ -16,8 +16,9 @@ export class UserService {
     return this.repository.save(createUserDto)
   }
 
-  findAll() {
-    return this.repository.find()
+  findAll(query) {
+    const { order, page, perPage, sort } = query
+    return this.repository.find({ skip: parseInt(perPage) * parseInt(page), take: parseInt(perPage), order: { [sort]: order } })
   }
 
   findOne(id: number) {
